@@ -1,0 +1,20 @@
+#Structure du programme C
+
+Plusieurs fichiers source composent le programme du serveur Webtel :
+
+- (w)ebteld.c;
+- (n)avwebtel.c et son en-tête navwebtel.h;
+- (j)ournal.c et son en-tête journal.h;
+
+Les fichiers source datathread.c, son en-tête datathread.h ainsi que
+dataspec.h sont fournis avec le cours de programmation système et sont ici
+mis à profit pour gérer le (m)ultithreading.
+
+/ Liens fils
+:w structure/webteld.nwt
+:n structure/navwebtel.nwt
+:j structure/journal.nwt
+
+/ Autres liens
+:m multithreading.nwt
+: documentation.nwt

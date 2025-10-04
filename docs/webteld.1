@@ -1,0 +1,117 @@
+.TH webteld 1 "juin 2024" "École de mines de Saint-Étienne - ISMIN 1ère année" "PROGRAMMATION SYSTÈME - Projet du second semestre"
+.
+.Sh NAME
+.B webteld
+- Serveur Webtel
+.
+.SH SYNOPSIS
+.B ./webteld
+.RB PORT
+.RB CLEF
+.
+.SH DESCRIPTION
+.B Webtel
+est une application du protocole SSH qui permet de servir des pages statiques, à
+l'image des premiers sites web.
+.br
+L'utilisateur peut naviguer à travers les différentes pages stockées dans le
+sous-répertoire
+.I nwt/
+en utilisant les commandes définies dans le code des pages.
+.br
+Le programme
+.B webteld
+constitue un serveur Webtel.
+Il écoute sur le port fourni en argument puis attend que des clients se connectent.
+.br
+Il s'agit d'un serveur mutithread à modèle dynamique. Ainsi, plusieurs clients
+peuvent être connectés à la fois, la seule limite réside dans les ressources de
+l'ordinateur.
+.br
+.B webteld
+doit être exécuté depuis son propre dossier. 
+.
+.SH PARAMÈTRES
+Il n'y a que deux paramètres et ils sont obligatoires.
+.TP
+.B PORT
+(entier)
+.br
+Port sur lequel écouter.
+.br
+Seul l'administrateur peut écouter sur les ports privilégiés, de 1 à 1023.
+.
+.TP
+.B CLEF
+(fichier)
+.br
+Clef privée à utiliser pour chiffrer la communication.
+.br
+Une clef de test est fournie dans le fichier
+.IR rsa.key .
+.
+.SH CLIENT
+Aucun programme client n'est fourni, car Webtel repose sur le protocole SSH
+pour lequel il existe déjà de nombreux clients.
+.br
+Tout client respectant le protocole peut être utilisé pour se connecter.
+.br
+Le plus répandu,
+.BR OpenSSH ,
+est installé par défaut sur la plupart des machines.
+.
+.SH EXEMPLES
+.TP
+.B ./webteld 1234 rsa.key
+.TP
+.PP
+Démarre le serveur avec la clef de test.
+.TP
+.B ssh localhost -p 1234
+.TP
+.PP
+Utilise le client
+.IR ssh (1)
+pour se connecter au serveur à travers la boucle locale.
+.br
+Le serveur doit être en fonctionnement.
+.
+.SH DÉPENDANCES
+.PP
+.B webteld
+utilise 
+.B libssh 
+pour établir les communications chiffrées.
+.br
+Ce paquet est distribué sous forme de bibliothèque partagée sur la plupart des
+distributions Linux.
+.br
+Sur Debian et ses dérivées :
+.B sudo apt install
+.BR libssh-dev .
+.
+.SH COMPILATION
+.PP
+Un
+.I Makefile
+est fourni, compiler le programme avec la commande
+.BR make .
+.
+.SH CHOIX TECHNIQUES
+.PP
+Les choix techniques pourraient être expliqués ici, mais c'est l'occasion
+d'essayer Webtel : la documentation du programme se trouve dans les pages
+servies par le serveur.
+.
+.SH AUTEURS
+.PP
+Tao-Kann Martin
+.I <tao-kann.martin@etu.emse.fr>
+.br
+Walid Mouh Mouh 
+.I <walid.mouhmouh@etu.emse.fr>
+.
+.SH GARANTIE 100% ARTISANAT DE NOS RÉGIONS
+.PP
+Les auteurs attestent qu'aucune partie de ce programme ou de sa documentation
+n'est générée par ordinateur.

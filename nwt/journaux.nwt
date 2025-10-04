@@ -1,0 +1,44 @@
+#Journaux
+
+Un mécanisme de journalisation permet de surveiller l'activité des clients.
+
+##Les trois journaux
+
+Toutes les entrées de journal sont (h)orodatées.
+
+###connexions.csv
+
+Chaque connexion avec son identifiant, adresse IP et bannière du client.
+La bannière est une sorte de user-agent, elle identifie son système d'exploitation
+et la version de son logiciel client.
+
+Le nom d'utilisateur du client est également journalisé.
+Pour le changer, taper une commande du type « ssh nom_utilisateur@SERVEUR -p PORT ».
+
+###commandes.csv
+
+Les commandes tapées par les clients.
+
+###pages.csv
+
+Les pages servies aux clients.
+Pour relier les deux derniers journaux à l'identité du client, il faudra
+joindre les tables avec un tableur ou un logiciel de bases de données.
+
+##Libre accès depuis Internet
+
+Dans le cas où le serveur est accessible librement depuis Internet, comme celui
+à l'adresse taokann.com, les journaux montrent toutes les vaines tentatives
+de robots de s'introduire dans le serveur.
+
+Webtel se comporte alors en pot de miel (honeypot), c'est-à-dire en piège
+attirant les robots-pirates tout en les détournant de leur véritable cible
+(l'accès à l'administration du serveur via SSH).
+
+##Réinitialiser les journaux
+
+La commande make clean efface aussi les journaux.
+Recompiler le programme avec la commande make.
+
+:h structure/journal.nwt
+: documentation.nwt

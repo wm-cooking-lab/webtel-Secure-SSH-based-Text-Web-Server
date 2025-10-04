@@ -1,0 +1,41 @@
+#Webtel
+
+Webtel permet de créer des sites publics accessibles via SSH.
+La notation utilisée est de type Markdown.
+
+Après chaque page, il est possible de taper des commandes pour se rendre
+sur une autre page.
+
+Les commandes se valident avec la touche entrée et sont sensibles à la casse.
+/
+/ Ceci est un commentaire
+/ Les lignes vides peuvent également être commentées pour éviter un saut de ligne
+/ supplémentaire sur la page.
+
+##Commandes locales
+
+Les commandes locales sont indiquées entre parenthèses dans le texte de la page.
+Elles permettent d'accéder aux pages adjacentes.
+Par exemple, la (d)ocumentation de Webtel est accessible en tapant la commande 'd'.
+
+##Commandes globales
+
+Les commandes globales sont par convention en majuscules et sont accessibles
+depuis toutes les pages. Elles sont au nombre de deux :
+
+- (H) pour retourner à l'accueil
+- (Q) pour se déconnecter
+
+##Commande vide
+
+La commande vide () s'utilise en appuyant directement sur la touche entrée.
+Elle permet de sortir d'une page « feuille » c'est-à-dire d'une page qui ne
+propose aucune commande locale.
+Par extension, elle est souvent disponible en tant que commande « retour »,
+lorsqu'une page ne possède qu'une seule page-mère.
+
+/ Lien vers la documentation
+:d documentation.nwt
+/
+/Lien secret
+:secret secret.nwt

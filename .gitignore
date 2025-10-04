@@ -1,0 +1,7 @@
+/webteld
+*.o
+*.csv
+rsa.key
+.DS_Store
+.vscode/
+.idea/

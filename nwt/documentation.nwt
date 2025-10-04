@@ -1,0 +1,16 @@
+#Documentation de Webtel
+
+Différents aspects du programme sont documentés ici :
+
+- La (s)tructure du programme;
+- Le fonctionnement (m)ultithread;
+- La s(y)ntaxe des fichiers nwt;
+- Le mécanisme de (c)ommunication opéré par libssh;
+- La gestion des (j)ournaux par le serveur.
+
+:s structure.nwt
+:m multithreading.nwt
+:y syntaxe.nwt
+:c communication.nwt
+:j journaux.nwt
+: index.nwt

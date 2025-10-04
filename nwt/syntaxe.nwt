@@ -1,0 +1,35 @@
+#Syntaxe des fichiers nwt
+
+« nwt » signifie (n)avwebtel.
+Ces fichiers sont placés dans le répertoire éponyme et contiennent les pages
+à servir sous la forme d'un code très simple :
+
+##Le dièze « # » en début de ligne marque un titre de premier niveau.
+
+L'indentation est ajustée et des effets de couleur apparaissent.
+Il est possible de faire varier le nombre de dièzes pour produire
+des titres jusqu'au quatrième niveau.
+
+##La barre « / » en début de ligne marque un commentaire.
+
+Le reste de la ligne est ignoré par l'extracteur et n'est pas affiché
+à l'utilisateur.
+
+##Les deux points « : » marquent une commande.
+
+Immédiatement après les deux points, on place le mot-clef de la commande.
+Après une espace, on place le nom de fichier de la page cible relativement
+au répertoire nwt.
+
+###Exemple
+
+« :a accueil.nwt »
+
+La commande (a) mènera à la page nwt/accueil.nwt.
+
+« : dossier/vide.nwt »
+
+La commande vide mènera à la page nwt/dossier/vide.nwt.
+
+:n structure/navwebtel.nwt
+: documentation.nwt

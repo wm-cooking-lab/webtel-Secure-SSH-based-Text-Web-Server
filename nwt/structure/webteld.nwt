@@ -1,0 +1,51 @@
+#webteld.c
+
+Ce fichier est le point d'entrée du programme, il gère tous les aspects de la
+communication SSH.
+Le nom « webteld » signifie qu'il s'agit d'un démon, i.e. un programme fait pour
+fonctionner en permanence sur un serveur.
+
+##fonction main
+
+La fonction main gère l'initialisation des sockets d'écoute et de communication.
+Elle suit le schéma classique bind - listen - accept.
+Plus d'informations figurent sur la page (c)ommunication.
+La fonction main contient la boucle principale du programme sans cesse à la recherche
+de nouveaux clients. Le compteur de cette boucle est utilisé comme identifiant
+unique des clients tout au long de l'exécution du serveur.
+
+##fonction session_client
+
+Cette fonction est appelée dans un nouveau (t)hread à chaque nouvelle connexion
+d'un client.
+
+Elle déroule les échanges prévus par le protocole SSH :
+
+- Échange de clefs;
+- Authentification;
+- Ouverture d'un sous-canal (channel);
+- Requêtes de pseudo-terminal et d'invite de commandes.
+
+On simule le succès de ces deux dernières requêtes car un client SSH standard va
+les demander. Cependant, on n'ouvre pas réellement de pseudo-terminal ni
+d'invite de commandes.
+Suite à ces requêtes, le programme passe la main à la fonction navwebtel.
+
+Ces échanges sont retranscrits sur la sortie standard pour détailler le fonctionnement
+à l'utilisateur.
+La connexion est (j)ournalisée.
+
+##fonction formater_adresse_ip
+
+La bibliothèque libssh permet de récupérer le descripteur de fichier associé
+à son socket de communication brut.
+On met à profit cette fonctionnalité pour récupérer l'adresse IP du client
+avec les fonctions standard que sont getpeername et inet_ntop.
+
+L'adresse IP convertie en chaîne de caractères lisible par un humain
+est transmise au (j)ournal.
+
+:c communication.nwt
+:t multithreading.nwt
+:j journaux.nwt
+: structure.nwt

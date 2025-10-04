@@ -1,0 +1,49 @@
+#Mécanismes de communication client - serveur
+
+Comme Webtel s'appuie sur le protocole SSH via une bibliothèque, la gestion
+des sockets bruts lui est déléguée.
+
+Cependant, les mécanismes sont sensiblement les mêmes.
+
+##Structures de données
+
+- La structure pointée par ssh_bind contient le socket d'écoute;
+- La structure pointée par ssh_session contient le socket de communication;
+- La structure pointée par ssh_channel permet de multiplexer la session,
+  même si seulement un unique ssh_channel est utilisé ici.
+
+Il y a différents types de ssh_channel, notamment pour rediriger des ports ou
+l'environnement graphique. Nous n'avons besoin que d'un canal textuel basique.
+
+##Fonctions déléguées des appels système
+
+Les fonctions de libssh se chargent du chiffrement des données puis se contentent
+d'appeler les appels système correspondants :
+
+- ssh_bind_new appelle socket(2) pour créer un socket d'écoute;
+- ssh_bind_listen appelle bind(2) et listen(2);
+- ssh_bind_accept appelle accept(2).
+
+Enfin, les appels d'entrée - sortie ont également leur équivalent :
+
+- ssh_channel_read appelle read(2);
+- ssh_channel_write appelle write(2).
+
+À noter que la lecture et l'écriture se font sur un ssh_channel et non directement
+sur la ssh_session. Leur syntaxe est analogue aux appels système correspondants.
+
+##Messages du protocole
+
+Dans le protocole SSH, le client peut demander toutes sortes de choses, que le
+serveur est libre de fournir ou non.
+Ainsi, on boucle sur les messages reçus dans (w)ebteld.c jusqu'à recevoir une
+demande de terminal. Les autres demandes sont déclinées.
+
+Ici, les messages du protocole sont gérés de manière synchrone avec une boucle.
+libssh permet également d'écrire des callbacks appelés de manière asynchrone à
+chaque évènement provoqué par le client, mais cela n'a pas d'intérêt ici
+car nous ne mettons en pratique qu'une petite partie du protocole, essentiellement
+pour son chiffrement.
+
+:w structure/webteld.nwt
+: documentation.nwt

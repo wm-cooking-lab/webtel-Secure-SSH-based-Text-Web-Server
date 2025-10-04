@@ -1,0 +1,25 @@
+#journal.c et son en-tête journal.h
+
+Ces fichiers servent à écrire dans les trois (j)ournaux :
+
+- connexions.csv liste chaque connexion et leur attribue un identifiant;
+- commandes.csv liste les commandes tapées et les associe à l'identifiant du client;
+- pages.csv liste les pages servies à chaque client.
+
+Les commandes sont journalisées même si elles n'aboutissent pas.
+
+##fonction horodater
+
+Toutes les entrées de journal sont horodatées grâce à cette fonction.
+Le nombre de secondes depuis l' « époque Unix » est converti en date et heure
+par les fonctions de la bibliothèque time.h.
+
+##fonctions journaliser et journaliser_connexion
+
+Ces fonctions ouvrent chacune leur journal respectif pour y ajouter une ligne.
+Comme elles sont amenées à s'exécuter simultanément, on utilise des (m)utexes
+pour empêcher les fichiers d'être ouverts par plusieurs threads à la fois.
+
+:j journaux.nwt
+:m multithreading.nwt
+: structure.nwt

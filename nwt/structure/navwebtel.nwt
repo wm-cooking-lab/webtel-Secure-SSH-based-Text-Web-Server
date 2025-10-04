@@ -1,0 +1,53 @@
+#navwebtel.c et son en-tête navwebtel.h
+
+Ce code gère la partie purement applicative du protocole sans se soucier
+des mécanismes de (c)ommunication mis en œuvre.
+
+##fonction navwebtel
+
+C'est le point d'entrée de l'application.
+Elle prend en paramètre le canal SSH qui sera utilisé tout au long de la session
+pour communiquer avec le client.
+
+Elle comprend une boucle principale infinie qui permet de naviguer à volonté
+dans le site.
+
+La page demandée est lue, analysée par une fonction ad-hoc puis la boucle
+se met à l'écoute des commandes tapées par l'utilisateur.
+C'est à cet instant que les commandes globales sont reconnues.
+Les commandes locales font partie de la structure qui représente la page.
+
+##fonction lire_ligne
+
+Cette fonction écoute le clavier caractère par caractère et détecte le retour
+à la ligne comme signal de validation.
+
+Elle s'occupe également de recopier l'entrée sur la sortie, provoquant un « écho »
+qui permet à l'utilisateur de voir ce qu'il tape tout en lui confirmant la bonne
+réception de chaque caractère.
+
+Cette fonction pourrait être améliorée pour prendre en charge le retour arrière.
+
+##fonction nwt_extraire_page
+
+Cette fonction ouvre le fichier de la page demandée et l'analyse.
+Le fichier est ouvert en lecture seule donc les accès simultanés de posent pas
+de problème.
+
+La page est stockée dans une structure conçue à cet effet pour être utilisable
+par le reste du programme.
+
+##fonction nwt_extraire_commande
+
+Les commandes ont également sur structure ad-hoc et sont analysées par cette fonction.
+Elles prennent ensuite place dans le talbeau de commandes de la structure de page.
+
+##fonction nwt_formater_titre
+
+On compte ici le nombre de caractères « dièze » qui préfixent une ligne pour en
+déduire le niveau d'indentation et les effets à appliquer.
+
+La constante échappement_titres contient les séquences d'échappement appropriées.
+
+:c communication.nwt
+: structure.nwt

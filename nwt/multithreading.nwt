@@ -1,0 +1,38 @@
+#Multithreading
+
+Le serveur Webtel webteld est multithread.
+Plusieurs clients peuvent donc se connecter à la fois.
+
+##Modèle dynamique
+
+Un nouveau thread est créé à chaque connexion d'un client.
+Les données propres à chaque thread sont stockées dans une liste chaînée
+fournie par le module datathread.h; composante du cours de programmation système.
+
+La structure la plus importante à transmette est la « session », qui agit comme
+un (s)ocket de communication avec le client.
+
+##Arrêt du serveur
+
+Le serveur peut être arrêté avec CTRL-C.
+Le signal d'interruption « SIGINT » est confié à la fonction quitter de (w)ebteld.c
+qui brandit un fanion de manière atomique.
+
+Cependant, il est nécessaire de démarrer une connexion avec un client pour
+débloquer l'appel à accept(2).
+La boucle principale se termine alors et tous les threads sont attendus.
+
+Pour cela, il a fallu modifier la fonction joinDataThread pour attendre tous les
+threads de la liste chaînée et non uniquement ceux qui sont déjà déconnectés.
+
+Les clients peuvent ainsi terminer leur navigation, puis le serveur s'arrête.
+
+##Mécanismes de synchronisation
+
+L'accès aux journaux en écriture est protégé par des mutexes.
+En effet, plusieurs threads pourraient en demander l'accès au même moment,
+provoquant l'échec de l'appel à open(2).
+
+:s communication.nwt
+:w structure/webteld.nwt
+: documentation.nwt
